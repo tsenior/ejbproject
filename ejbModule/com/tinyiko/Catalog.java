@@ -1,5 +1,7 @@
 package com.tinyiko;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
@@ -10,11 +12,17 @@ import javax.ejb.Stateless;
 @LocalBean
 public class Catalog implements CatalogLocal {
 
-    /**
-     * Default constructor. 
-     */
     public Catalog() {
-        // TODO Auto-generated constructor stub
     }
+
+	@Override
+	public List<CatalogItem> getItems() {
+		return null;
+	}
+
+	@Override
+	public void addItem(CatalogItem catalogItem) {
+		
+	}
 
 }
