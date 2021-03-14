@@ -6,6 +6,8 @@ import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  * Session Bean implementation class Catalog
@@ -14,6 +16,9 @@ import javax.ejb.Stateless;
 @LocalBean
 public class Catalog implements CatalogLocal {
 	
+	@PersistenceContext
+	private EntityManager entityManager;
+	
 	private List<CatalogItem> catalogItems = new ArrayList<>();
 	
 	public Catalog() {
@@ -21,12 +26,12 @@ public class Catalog implements CatalogLocal {
 	}
 
 	public List<CatalogItem> getItems() {
-		return this.catalogItems;
+		return this.entityManager.createQuery("select c from CatalogItem c", CatalogItem.class).getResultList();
 	}
 
 	@Override
 	public void addItem(CatalogItem catalogItem) {
-		this.catalogItems.add(catalogItem);
+		this.entityManager.persist(catalogItem);
 		
 	}
 
