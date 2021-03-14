@@ -11,7 +11,6 @@ public class CatalogItem {
 	private LocalDate availableDate;
 	
 	public CatalogItem() {
-		super();
 	}
 
 	public CatalogItem(Long itemId, String name, String manufacturer, String description, LocalDate availableDate) {
