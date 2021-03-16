@@ -1,13 +1,13 @@
-package com.tinyiko;
+package com.tinyiko.ejbean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Singleton;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import com.tinyiko.entities.CatalogItem;
 
 /**
  * Session Bean implementation class Catalog
@@ -22,7 +22,12 @@ public class Catalog implements CatalogLocal {
 	//private List<CatalogItem> catalogItems = new ArrayList<>();
 	
 	public Catalog() {
-		super();
+	}
+	
+	@Override
+	public void saveItem(CatalogItem catalogItem) {
+		this.entityManager.merge(catalogItem);
+		
 	}
 
 	public List<CatalogItem> getItems() {
@@ -56,5 +61,7 @@ public class Catalog implements CatalogLocal {
 				" where c.name like :name", CatalogItem.class).
 				setParameter("name", "%" + name + "%").getResultList();
 	}
+
+
 
 }
